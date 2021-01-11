@@ -4,11 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit,faTrash } from "@fortawesome/free-solid-svg-icons";
 import {Link} from 'react-router-dom';
 import AddBook from './addBook';
-import UpdateBook from './updateBook';
-import {BrowserRouter, Redirect, Route, Switch,useHistory} from "react-router-dom";
-
-
-
 import axios from "axios";
 
 let endpoint="http://127.0.0.1:4000";
@@ -56,12 +51,6 @@ export default class Home extends Component{
             console.log(error);
         });
     };
-    handleOnclick=(data)=>{
-        console.log("data>>>>>>>>>>>>>>>>>>>",data)
-        return (<div>
-            <UpdateBook >Hello {data}</UpdateBook>
-        </div>)
-    };
 
     onClickGoto=(event)=>{
         console.log("event$$$$$$$$$$$$$$$$$",event.target.value)
@@ -69,16 +58,6 @@ export default class Home extends Component{
         this.setState({
             renderPage:e
         })
-        // if(e==="addBook"){
-        //     return ( <div>
-        //             {/*<Route exact path="/home">*/}
-        //                 {/*<Redirect to="/add_book" /> : <AddBook />*/}
-        //             {/*</Route>*/}
-        //             <AddBook/>
-        //         </div>
-        //     )
-        // }
-
 
     };
 
@@ -86,10 +65,6 @@ export default class Home extends Component{
         switch (this.state.renderPage) {
             case "addBook":
                 return <AddBook />;
-            // case 2:
-            //     return <View2 />;
-            // default:
-            //     return <Main clickBtn={this.clickBtn} />;
         }
         let queryTableRows=
             this.state.list.map((items,index) =>{
@@ -141,7 +116,7 @@ export default class Home extends Component{
                         <th>Author</th>
                         <th>Publisher</th>
                         <th>Category</th>
-                        <th>Book cover</th>
+                        <th>Image</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -149,8 +124,9 @@ export default class Home extends Component{
                     { tableRows}
                     </tbody>
                 </table>
-
+                <br/>
                 <button style={{float:"left",fontSize:"19px"}} value='addBook' onClick={this.onClickGoto}>Add Books</button>
+                <Link style={{float:"left",fontSize:"19px",marginLeft:"1%"}} to={{pathname:'/'}}>Logout</Link>
             </div>
         );
     }

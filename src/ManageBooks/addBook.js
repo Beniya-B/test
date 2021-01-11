@@ -15,12 +15,23 @@ export default class AddBook extends Component{
             image:null
         };
         this.getBookDetails = this.getBookDetails.bind(this);
+        this.fileInput = React.createRef();
     }
 
 
     getBookDetails=(event)=>{
         event.preventDefault();
-        let file=this.state.image;
+        // let file=this.state.image;
+        let file;
+        console.log("this.fileInput.current.files",this.fileInput.current.files)
+        if(this.fileInput.current.files.length>0){
+            // alert(
+            //     `Selected file - ${
+            //         this.fileInput.current.files[0].name
+            //         }`
+            // );
+            file=this.fileInput.current.files[0].name;
+        }
         let payload = new FormData();
         let config = {
             headers : {
@@ -73,7 +84,7 @@ export default class AddBook extends Component{
                     /><br/>
                     <p htmlFor="image">Upload Image:</p>
                     <input type="file"
-                           name="image" onChange={this.handleOnChange} required/><br/>
+                           name="image" ref={this.fileInput} onChange={this.handleOnChange} required/><br/>
                     <button  type="submit" value="Submit">Submit</button>
                 </form>
             </div>

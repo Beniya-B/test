@@ -1,15 +1,9 @@
 import React, {Component} from 'react';
 import '../style/tablestyle.css'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit,faTrash } from "@fortawesome/free-solid-svg-icons";
-import {Link} from 'react-router-dom';
-import AddBook from './addBook';
-import UpdateBook from './updateBook';
-import {BrowserRouter, Redirect, Route, Switch,useHistory} from "react-router-dom";
-
-
-
 import axios from "axios";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEdit} from "@fortawesome/free-solid-svg-icons";
+import {Link} from "react-router-dom";
 
 let endpoint="http://127.0.0.1:4000";
 
@@ -64,37 +58,10 @@ export default class NonAdmin extends Component{
             console.log(error);
         });
     };
-    // handleOnclick=(data)=>{
-    //     console.log("data>>>>>>>>>>>>>>>>>>>",data)
-    //     return (<div>
-    //         <UpdateBook >Hello {data}</UpdateBook>
-    //     </div>)
-    // };
-
-    // onClickGoto=(event)=>{
-    //     console.log("event$$$$$$$$$$$$$$$$$",event.target.value)
-    //     let e=event.target.value;
-    //     this.setState({
-    //         renderPage:e
-    //     })
-    //     // if(e==="addBook"){
-    //     //     return ( <div>
-    //     //             {/*<Route exact path="/home">*/}
-    //     //                 {/*<Redirect to="/add_book" /> : <AddBook />*/}
-    //     //             {/*</Route>*/}
-    //     //             <AddBook/>
-    //     //         </div>
-    //     //     )
-    //     // }
-    //
-    //
-    // };
-
     render() {
         let queryTableRows=
             this.state.list.map((items,index) =>{
-                // console.log("items==========",items._id)
-                // const {_id,queryname,author,query,descrip"bookName:" + obj.bookNametion,lastmodified}=items;
+
                 const {bookName,author,publisher,category,img}=items;
                 return(
                     <tr key={index}>
@@ -114,10 +81,6 @@ export default class NonAdmin extends Component{
                             {img}
                         </td>
                         <td>
-                            {/*<Link to={{pathname:'/update',query:items*/}
-                            {/*}}><FontAwesomeIcon style={{color:"white"}} icon={faEdit} /></Link>*/}
-                            {/*/!*<button value="updateBook" onClick={()=>this.handleOnclick(items)}><FontAwesomeIcon icon={faEdit} /></button>*!/*/}
-
                             <button onClick={this.updateStock.bind(this,items)}>Buy now</button>
                         </td>
                     </tr>
@@ -141,7 +104,7 @@ export default class NonAdmin extends Component{
                         <th>Author</th>
                         <th>Publisher</th>
                         <th>Category</th>
-                        <th>Book cover</th>
+                        <th>Image</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -149,7 +112,7 @@ export default class NonAdmin extends Component{
                     { tableRows}
                     </tbody>
                 </table>
-
+                <Link style={{float:"left",fontSize:"19px",marginLeft:"1%"}} to={{pathname:'/'}}>Logout</Link>
             </div>
         );
     }

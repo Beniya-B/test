@@ -38,11 +38,11 @@ class UpdateBook extends Component{
         console.log("state image---------------",typeof (this.fileInput.current.files))
 
         if(this.fileInput.current.files.length>0){
-            alert(
-                `Selected file - ${
-                    this.fileInput.current.files[0].name
-                    }`
-            );
+            // alert(
+            //     `Selected file - ${
+            //         this.fileInput.current.files[0].name
+            //         }`
+            // );
              file=this.fileInput.current.files[0].name;
         }else {
             file=this.state.image;
